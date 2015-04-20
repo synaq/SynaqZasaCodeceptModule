@@ -1,0 +1,22 @@
+{
+    "name": "synaq/zasa-codecept-module",
+    "description": "Zimbra Admin SOAP API module for Coception using the Synaq ZASA bundle",
+    "authors": [
+        {
+            "name": "Willem Viljoen",
+            "email": "willemv@synaq.com"
+        }
+    ],
+    "require": {
+        "synaq/zasa-bundle": "dev-master"
+    },
+    "require-dev": {
+	"codeception/codeception": "~2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Codeception\\Module\\": "src/Codeception/Module"
+        }
+    },
+    "minimum-stability": "dev"
+}
