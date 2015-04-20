@@ -34,6 +34,47 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
         $this->module->_setZasa($this->zasa);
     }
 
+    public function testGrabResultFromZimbra()
+    {
+        $dummyResult = array(
+            'foo' => 'bar'
+        );
+
+        $this->module->_setResult($dummyResult);
+        $result = $this->module->grabResultFromZimbra();
+        $this->assertEquals($dummyResult, $result, "Incorrect result returned");
+    }
+
+    public function testSeeResultFromZimbraContains()
+    {
+        $dummyResult = array(
+            'foo' => 'bar',
+            'baz' => array(
+                'fruit' => 'apple',
+                'veg' => 'tomato',
+                'meat' => 'beef'
+            )
+        );
+
+        $this->module->_setResult($dummyResult);
+        $this->module->seeResultFromZimbraContains(array('fruit' => 'apple'));
+    }
+
+    public function testDontSeeResultFromZimbraContains()
+    {
+        $dummyResult = array(
+            'foo' => 'bar',
+            'baz' => array(
+                'fruit' => 'apple',
+                'veg' => 'tomato',
+                'meat' => 'beef'
+            )
+        );
+
+        $this->module->_setResult($dummyResult);
+        $this->module->dontSeeResultFromZimbraContains(array('fruit' => 'banana'));
+    }
+
     public function testGetAccountFromZimbra()
     {
         $this->zasa
@@ -60,8 +101,10 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
                 'zimbraAccountStatus' => 'active'
             ));
 
-        $result = $this->module->getAccountFromZimbra("example@example.com");
+        $this->module->getAccountFromZimbra("example@example.com");
         $this->zasa->mockery_verify();
+
+        $result = $this->module->grabResultFromZimbra();
         $this->assertInternalType('array', $result, "Result not returned as array");
         $this->assertArrayHasKey('id', $result, "Account ID not returned");
         $this->assertEquals('dummy-account-id', $result['id'], "Incorrect account ID returned");
