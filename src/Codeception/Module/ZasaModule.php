@@ -44,6 +44,7 @@ class ZasaModule extends Module implements MultiSession
      */
     public function getAccountFromZimbra($name)
     {
+        $this->_zasaCreate();
         $this->result = $this->zasa->getAccount($name);
     }
 
@@ -53,6 +54,7 @@ class ZasaModule extends Module implements MultiSession
      */
     public function modifyAccountOnZimbra($name, $attributes)
     {
+        $this->_zasaCreate();
         $accountId = $this->zasa->getAccountId($name);
         $this->result = $this->zasa->modifyAccount($accountId, $attributes);
     }
@@ -103,12 +105,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function _initializeSession()
     {
-        $zasa = new ZimbraConnector($this->client,
-            $this->config['server'],
-            $this->config['admin_user'],
-            $this->config['admin_pass']);
-
-        $this->_setZasa($zasa);
+        $this->_setZasa(null);
     }
 
     public function _backupSessionData()
@@ -140,6 +137,18 @@ class ZasaModule extends Module implements MultiSession
         $this->zasa = $zasa;
 
         return $this;
+    }
+
+    private function _zasaCreate()
+    {
+        if (is_null($this->zasa)) {
+            $zasa = new ZimbraConnector($this->client,
+                $this->config['server'],
+                $this->config['admin_user'],
+                $this->config['admin_pass']);
+
+            $this->_setZasa($zasa);
+        }
     }
 
     /**
