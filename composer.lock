@@ -2368,23 +2368,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/synaq/SynaqZasaBundle.git",
-                "reference": "5e83c59ebf07ec9539e07e255ccab86c985c94db"
+                "reference": "1ed60a009d790baab561423d86cd30ce14c064fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/5e83c59ebf07ec9539e07e255ccab86c985c94db",
-                "reference": "5e83c59ebf07ec9539e07e255ccab86c985c94db",
+                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/1ed60a009d790baab561423d86cd30ce14c064fa",
+                "reference": "1ed60a009d790baab561423d86cd30ce14c064fa",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "mockery/mockery": "dev-master",
                 "php": ">=5.3.2",
-                "phpunit/phpunit": "3.7.*",
                 "symfony/framework-bundle": ">=2.1",
                 "synaq/curl-bundle": "dev-master"
             },
             "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "3.7.*",
                 "symfony/validator": "2.1.*",
                 "symfony/yaml": "2.1.*"
             },
@@ -2408,7 +2408,7 @@
                 "api",
                 "zimbra"
             ],
-            "time": "2015-04-20 10:15:13"
+            "time": "2015-04-21 05:59:37"
         }
     ],
     "packages-dev": [],
