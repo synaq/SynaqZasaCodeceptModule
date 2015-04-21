@@ -109,4 +109,27 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('id', $result, "Account ID not returned");
         $this->assertEquals('dummy-account-id', $result['id'], "Incorrect account ID returned");
     }
+
+    public function testModifyAccountOnZimbra()
+    {
+        $this->zasa
+            ->shouldReceive('getAccountId')
+            ->once()
+            ->with('example@example.com')
+            ->andReturn('example-account-id')
+            ->getMock()
+            ->shouldReceive('modifyAccount')
+            ->once()
+            ->withArgs(array(
+                'example-account-id',
+                array(
+                    'zimbraPrefMailForwardingAddress' => 'dummy@example.com'
+                )
+            ));
+
+        $this->module->modifyAccountOnZimbra("example@example.com", array(
+            'zimbraPrefMailForwardingAddress' => 'dummy@example.com'
+        ));
+        $this->zasa->mockery_verify();
+    }
 }
