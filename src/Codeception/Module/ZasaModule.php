@@ -105,7 +105,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function _initializeSession()
     {
-        $this->_setZasa(null);
+        $this->zasa = null;
     }
 
     public function _backupSessionData()
