@@ -8,9 +8,7 @@
         }
     ],
     "require": {
-        "synaq/zasa-bundle": "dev-master"
-    },
-    "require-dev": {
+        "synaq/zasa-bundle": "dev-master",
 	"codeception/codeception": "~2"
     },
     "autoload": {
