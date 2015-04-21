@@ -86,7 +86,13 @@ class ZasaModule extends Module implements MultiSession
 
     public function _initialize()
     {
-        $this->client = new Wrapper();
+        $this->client = new Wrapper(null, false, true, false, array(
+            'CURLOPT_RETURNTRANSFER' => true,
+            'CURLOPT_SSL_VERIFYPEER' => false,
+            'CURLOPT_SSL_VERIFYHOST' => false,
+            'CURLOPT_SSLVERSION' => 1
+
+        ));
         $this->_initializeSession();
     }
 
