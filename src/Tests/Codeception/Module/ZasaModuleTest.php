@@ -8,6 +8,7 @@
 
 namespace Codeception\Module;
 
+use Codeception\Lib\ModuleContainer;
 use Synaq\ZasaBundle\Connector\ZimbraConnector;
 use \Mockery as m;
 
@@ -18,7 +19,7 @@ use \Mockery as m;
 class ZasaModuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ZimbraConnector|m\MockInterface
+     * @var ZimbraConnector | m\Mock
      */
     private $zasa;
 
@@ -29,8 +30,10 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        /** @var ModuleContainer $container */
+        $container = m::mock('\Codeception\Lib\ModuleContainer');
         $this->zasa = \Mockery::mock('Synaq\ZasaBundle\Connector\ZimbraConnector');
-        $this->module = new ZasaModule();
+        $this->module = new ZasaModule($container);
         $this->module->_setZasa($this->zasa);
     }
 
@@ -116,8 +119,9 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('getAccountId')
             ->once()
             ->with('example@example.com')
-            ->andReturn('example-account-id')
-            ->getMock()
+            ->andReturn('example-account-id');
+
+        $this->zasa
             ->shouldReceive('modifyAccount')
             ->once()
             ->withArgs(array(
