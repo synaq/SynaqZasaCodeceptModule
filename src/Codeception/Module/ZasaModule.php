@@ -108,7 +108,7 @@ class ZasaModule extends Module implements MultiSession
         $this->zasa = null;
     }
 
-    public function _backupSessionData()
+    public function _backupSession()
     {
         return [
             'client'    => $this->client,
@@ -116,7 +116,7 @@ class ZasaModule extends Module implements MultiSession
         ];
     }
 
-    public function _loadSessionData($data)
+    public function _loadSession($data)
     {
         foreach ($data as $key => $val) {
             $this->$key = $val;
