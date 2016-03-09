@@ -11,14 +11,14 @@ namespace Codeception\Module\Tests;
 
 class GrabResultFromZimbraTest extends ZasaModuleTestCase
 {
-    public function testGrabResultFromZimbra()
+    /**
+     * @test
+     */
+    public function shouldReturnLastResultSetInModule()
     {
-        $dummyResult = array(
-            'foo' => 'bar'
-        );
-
+        $dummyResult = ['foo' => 'bar'];
         $this->module->_setResult($dummyResult);
         $result = $this->module->grabResultFromZimbra();
-        $this->assertEquals($dummyResult, $result, "Incorrect result returned");
+        $this->assertEquals($dummyResult, $result);
     }
 }
