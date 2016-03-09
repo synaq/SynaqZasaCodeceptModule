@@ -8,9 +8,6 @@
 
 namespace Codeception\Module\Tests;
 
-use Codeception\Lib\ModuleContainer;
-use Codeception\Module\ZasaModule;
-use Synaq\ZasaBundle\Connector\ZimbraConnector;
 use \Mockery as m;
 
 /**
@@ -19,25 +16,6 @@ use \Mockery as m;
  */
 class ZasaModuleTest extends ZasaModuleTestCase
 {
-    /**
-     * @var ZimbraConnector | m\Mock
-     */
-    private $zasa;
-
-    /**
-     * @var ZasaModule
-     */
-    private $module;
-
-    protected function setUp()
-    {
-        /** @var ModuleContainer $container */
-        $container = m::mock('\Codeception\Lib\ModuleContainer');
-        $this->zasa = \Mockery::mock('Synaq\ZasaBundle\Connector\ZimbraConnector');
-        $this->module = new ZasaModule($container);
-        $this->module->_setZasa($this->zasa);
-    }
-
     public function testGrabResultFromZimbra()
     {
         $dummyResult = array(
