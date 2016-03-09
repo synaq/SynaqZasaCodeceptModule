@@ -11,10 +11,10 @@ namespace Codeception\Module\Tests;
 use \Mockery as m;
 
 /**
- * Class ZasaModuleTest
+ * Class ModifyAccountOnZimbraTest
  * @package Codeception\Module
  */
-class ZasaModuleTest extends ZasaModuleTestCase
+class ModifyAccountOnZimbraTest extends ZasaModuleTestCase
 {
     public function testModifyAccountOnZimbra()
     {
