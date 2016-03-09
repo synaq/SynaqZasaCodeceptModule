@@ -16,19 +16,18 @@ class DontSeeResultFromZimbraContainsTest extends ZasaModuleTestCase
      */
     public function shouldPassIfResultDoesNotContainSubset()
     {
-        $dummyResult = [
-            'foo' => 'bar',
-            'baz' => [
-                'fruit' => 'apple',
-                'veg' => 'tomato',
-                'meat' => 'beef'
+        $this->module->_setResult(
+            [
+                'foo' => 'bar',
+                'baz' => [
+                    'fruit' => 'apple',
+                    'veg' => 'tomato',
+                    'meat' => 'beef'
+                ]
             ]
-        ];
+        );
 
-        $subset = ['fruit' => 'banana'];
-
-        $this->module->_setResult($dummyResult);
-        $this->module->dontSeeResultFromZimbraContains($subset);
+        $this->module->dontSeeResultFromZimbraContains(['fruit' => 'banana']);
     }
 
     /**
@@ -39,18 +38,17 @@ class DontSeeResultFromZimbraContainsTest extends ZasaModuleTestCase
      */
     public function shouldFailIfResultContainsSubset()
     {
-        $dummyResult = [
-            'foo' => 'bar',
-            'baz' => [
-                'fruit' => 'apple',
-                'veg' => 'tomato',
-                'meat' => 'beef'
+        $this->module->_setResult(
+            [
+                'foo' => 'bar',
+                'baz' => [
+                    'fruit' => 'apple',
+                    'veg' => 'tomato',
+                    'meat' => 'beef'
+                ]
             ]
-        ];
+        );
 
-        $subset = ['fruit' => 'apple'];
-
-        $this->module->_setResult($dummyResult);
-        $this->module->dontSeeResultFromZimbraContains($subset);
+        $this->module->dontSeeResultFromZimbraContains(['fruit' => 'apple']);
     }
 }
