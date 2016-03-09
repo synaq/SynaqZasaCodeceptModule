@@ -16,21 +16,6 @@ use \Mockery as m;
  */
 class ZasaModuleTest extends ZasaModuleTestCase
 {
-    public function testSeeResultFromZimbraContains()
-    {
-        $dummyResult = array(
-            'foo' => 'bar',
-            'baz' => array(
-                'fruit' => 'apple',
-                'veg' => 'tomato',
-                'meat' => 'beef'
-            )
-        );
-
-        $this->module->_setResult($dummyResult);
-        $this->module->seeResultFromZimbraContains(array('fruit' => 'apple'));
-    }
-
     public function testDontSeeResultFromZimbraContains()
     {
         $dummyResult = array(
