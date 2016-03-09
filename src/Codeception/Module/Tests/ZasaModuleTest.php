@@ -6,9 +6,10 @@
  * Time: 16:36
  */
 
-namespace Codeception\Module;
+namespace Codeception\Module\Tests;
 
 use Codeception\Lib\ModuleContainer;
+use Codeception\Module\ZasaModule;
 use Synaq\ZasaBundle\Connector\ZimbraConnector;
 use \Mockery as m;
 
@@ -16,7 +17,7 @@ use \Mockery as m;
  * Class ZasaModuleTest
  * @package Codeception\Module
  */
-class ZasaModuleTest extends \PHPUnit_Framework_TestCase
+class ZasaModuleTest extends ZasaModuleTestCase
 {
     /**
      * @var ZimbraConnector | m\Mock
@@ -28,7 +29,7 @@ class ZasaModuleTest extends \PHPUnit_Framework_TestCase
      */
     private $module;
 
-    public function setUp()
+    protected function setUp()
     {
         /** @var ModuleContainer $container */
         $container = m::mock('\Codeception\Lib\ModuleContainer');
