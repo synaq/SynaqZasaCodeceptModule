@@ -29,7 +29,9 @@ class ZasaModuleTestCase extends \PHPUnit_Framework_TestCase
     {
         /** @var ModuleContainer $container */
         $container = m::mock('\Codeception\Lib\ModuleContainer');
+        /** @var ZimbraConnector | m\Mock zasa */
         $this->zasa = \Mockery::mock('Synaq\ZasaBundle\Connector\ZimbraConnector');
+        $this->zasa->shouldIgnoreMissing();
         $this->module = new ZasaModule($container);
         $this->module->_setZasa($this->zasa);
     }
