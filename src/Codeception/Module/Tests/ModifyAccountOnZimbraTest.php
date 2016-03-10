@@ -16,27 +16,32 @@ use \Mockery as m;
  */
 class ModifyAccountOnZimbraTest extends ZasaModuleTestCase
 {
-    public function testModifyAccountOnZimbra()
+    /**
+     * @test
+     */
+    public function shouldCallGetAccountIdOnZasaConnectorWithEmailAddress()
     {
-        $this->zasa
-            ->shouldReceive('getAccountId')
-            ->once()
-            ->with('example@example.com')
-            ->andReturn('example-account-id');
+        $this->module->modifyAccountOnZimbra('example@example.com', []);
+        $this->zasa->shouldHaveReceived('getAccountId')->with('example@example.com')->once();
+    }
 
-        $this->zasa
-            ->shouldReceive('modifyAccount')
-            ->once()
-            ->withArgs(array(
-                'example-account-id',
-                array(
-                    'zimbraPrefMailForwardingAddress' => 'dummy@example.com'
-                )
-            ));
+    /**
+     * @test
+     */
+    public function shouldCallModifyAccountWithIdReturnedFromGetAccountId()
+    {
+        $this->zasa->shouldReceive('getAccountId')->andReturn('example-account-id');
+        $this->module->modifyAccountOnZimbra(null, []);
+        $this->zasa->shouldHaveReceived('modifyAccount')->with('example-account-id', m::any())->once();
+    }
 
-        $this->module->modifyAccountOnZimbra("example@example.com", array(
-            'zimbraPrefMailForwardingAddress' => 'dummy@example.com'
-        ));
-        $this->zasa->mockery_verify();
+    /**
+     * @test
+     */
+    public function shouldCallModifyAccountWithAttributesArray()
+    {
+        $attributes = ['exampleKey' => 'Example value'];
+        $this->module->modifyAccountOnZimbra(null, $attributes);
+        $this->zasa->shouldHaveReceived('modifyAccount')->with(m::any(), $attributes)->once();
     }
 }
