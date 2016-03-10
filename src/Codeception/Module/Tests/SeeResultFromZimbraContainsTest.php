@@ -11,18 +11,42 @@ namespace Codeception\Module\Tests;
 
 class SeeResultFromZimbraContainsTest extends ZasaModuleTestCase
 {
-    public function testSeeResultFromZimbraContains()
+    /**
+     * @test
+     */
+    public function shouldPassIfResultContainsSubset()
     {
-        $dummyResult = array(
-            'foo' => 'bar',
-            'baz' => array(
-                'fruit' => 'apple',
-                'veg' => 'tomato',
-                'meat' => 'beef'
-            )
+        $this->module->_setResult(
+            [
+                'foo' => 'bar',
+                'baz' => [
+                    'fruit' => 'apple',
+                    'veg' => 'tomato',
+                    'meat' => 'beef'
+                ]
+            ]
         );
+        $this->module->seeResultFromZimbraContains(['fruit' => 'apple']);
+    }
 
-        $this->module->_setResult($dummyResult);
-        $this->module->seeResultFromZimbraContains(array('fruit' => 'apple'));
+    /**
+     * @test
+     *
+     * @expectedException \PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage I don't see that {"foo":"bar","baz":{"fruit":"apple","veg":"tomato","meat":"beef"}} contains {"fruit":"banana"}
+     */
+    public function shouldFailIfResultDoesNotContainSubset()
+    {
+        $this->module->_setResult(
+            [
+                'foo' => 'bar',
+                'baz' => [
+                    'fruit' => 'apple',
+                    'veg' => 'tomato',
+                    'meat' => 'beef'
+                ]
+            ]
+        );
+        $this->module->seeResultFromZimbraContains(['fruit' => 'banana']);
     }
 }
