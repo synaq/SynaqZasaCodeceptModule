@@ -9,6 +9,7 @@
 namespace Codeception\Module;
 
 use Codeception\Lib\Interfaces\MultiSession;
+use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
 use Codeception\TestCase;
 use Synaq\CurlBundle\Curl\Wrapper;
@@ -37,26 +38,30 @@ class ZasaModule extends Module implements MultiSession
 
     protected $requiredFields = array('server', 'admin_user', 'admin_pass');
 
-    /**
-     * Get an account from Zimbra
-     *
-     * @param string $name The name of the account. e.g. example@example.com
-     */
+    public function __construct(ModuleContainer $container, $config, ZimbraConnector $zasa = null)
+    {
+        if (!empty($zasa)) {
+            $this->zasa = $zasa;
+        } else {
+            parent::__construct($container, $config);
+            $this->_zasaCreate();
+        }
+    }
+
     public function getAccountFromZimbra($name)
     {
-        $this->_zasaCreate();
         $this->result = $this->zasa->getAccount($name);
     }
 
-    /**
-     * @param string $name The name of the account. e.g. example@example.com
-     * @param array $attributes Associative array of attributes to set on the account
-     */
     public function modifyAccountOnZimbra($name, $attributes)
     {
-        $this->_zasaCreate();
         $accountId = $this->zasa->getAccountId($name);
         $this->result = $this->zasa->modifyAccount($accountId, $attributes);
+    }
+
+    public function getDistributionListFromZimbra($emailAddress)
+    {
+        return $this->zasa->getDl($emailAddress);
     }
 
     /**
@@ -128,17 +133,6 @@ class ZasaModule extends Module implements MultiSession
         unset($data);
     }
 
-    /**
-     * @param ZimbraConnector $zasa
-     * @return ZasaModule
-     */
-    public function _setZasa(ZimbraConnector $zasa)
-    {
-        $this->zasa = $zasa;
-
-        return $this;
-    }
-
     private function _zasaCreate()
     {
         if (is_null($this->zasa)) {
@@ -147,7 +141,7 @@ class ZasaModule extends Module implements MultiSession
                 $this->config['admin_user'],
                 $this->config['admin_pass']);
 
-            $this->_setZasa($zasa);
+            $this->zasa = $zasa;
         }
     }
 
@@ -195,10 +189,5 @@ class ZasaModule extends Module implements MultiSession
         }
 
         return $ret;
-    }
-
-    public function getDistributionListFromZimbra($emailAddress)
-    {
-        return $this->zasa->getDl($emailAddress);
     }
 }

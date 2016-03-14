@@ -27,13 +27,13 @@ class ZasaModuleTestCase extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        /** @var ModuleContainer $container */
+        /** @var ModuleContainer | m\Mock $container */
         $container = m::mock('\Codeception\Lib\ModuleContainer');
+        $container->shouldIgnoreMissing();
         /** @var ZimbraConnector | m\Mock zasa */
         $this->zasa = \Mockery::mock('Synaq\ZasaBundle\Connector\ZimbraConnector');
         $this->zasa->shouldReceive('getAccountId')->andReturn('some-account-id')->byDefault();
         $this->zasa->shouldIgnoreMissing();
-        $this->module = new ZasaModule($container);
-        $this->module->_setZasa($this->zasa);
+        $this->module = new ZasaModule($container, array(), $this->zasa);
     }
 }
