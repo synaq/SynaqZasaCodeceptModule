@@ -93,13 +93,6 @@ class ZasaModule extends Module implements MultiSession
 
     public function _initialize()
     {
-        $this->client = new Wrapper(null, false, true, false, array(
-            'CURLOPT_RETURNTRANSFER' => true,
-            'CURLOPT_SSL_VERIFYPEER' => false,
-            'CURLOPT_SSL_VERIFYHOST' => false,
-            'CURLOPT_SSLVERSION' => 1
-
-        ));
         $this->_initializeSession();
     }
 
@@ -135,6 +128,16 @@ class ZasaModule extends Module implements MultiSession
 
     private function _zasaCreate()
     {
+        if (is_null($this->client))
+        {
+            $this->client = new Wrapper(null, false, true, false, array(
+                'CURLOPT_RETURNTRANSFER' => true,
+                'CURLOPT_SSL_VERIFYPEER' => false,
+                'CURLOPT_SSL_VERIFYHOST' => false,
+                'CURLOPT_SSLVERSION' => 1
+            ));
+        }
+
         if (is_null($this->zasa)) {
             $zasa = new ZimbraConnector($this->client,
                 $this->config['server'],
