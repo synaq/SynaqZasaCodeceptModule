@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "synaq/zasa-bundle": "dev-master",
+        "synaq/zasa-bundle": "1.5",
 	    "codeception/codeception": "^2.1"
     },
     "require-dev": {

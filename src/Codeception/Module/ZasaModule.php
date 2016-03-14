@@ -196,4 +196,9 @@ class ZasaModule extends Module implements MultiSession
 
         return $ret;
     }
+
+    public function getDistributionListFromZimbra($emailAddress)
+    {
+        return $this->zasa->getDl($emailAddress);
+    }
 }
