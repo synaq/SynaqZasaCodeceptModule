@@ -28,7 +28,8 @@ class GetDistributionListFromZimbraTest extends ZasaModuleTestCase
         $this->zasa->shouldReceive('getDl')->andReturn([
             'id' => 'dummy-dl-id'
         ]);
-        $dl = $this->module->getDistributionListFromZimbra(null);
+        $this->module->getDistributionListFromZimbra(null);
+        $dl = $this->module->grabResultFromZimbra();
         $this->assertEquals('dummy-dl-id', $dl['id']);
     }
 }
