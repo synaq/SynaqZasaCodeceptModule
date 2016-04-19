@@ -66,7 +66,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function getDomainFromZimbra($domainName)
     {
-        $this->zasa->getDomain($domainName);
+        $this->result = $this->zasa->getDomain($domainName);
     }
 
     /**
