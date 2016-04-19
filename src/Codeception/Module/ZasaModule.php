@@ -64,6 +64,11 @@ class ZasaModule extends Module implements MultiSession
         $this->result = $this->zasa->getDl($emailAddress);
     }
 
+    public function getDomainFromZimbra($domainName)
+    {
+        $this->zasa->getDomain($domainName);
+    }
+
     /**
      * @return array
      */
