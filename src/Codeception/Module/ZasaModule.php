@@ -197,4 +197,9 @@ class ZasaModule extends Module implements MultiSession
 
         return $ret;
     }
+
+    public function createDomainOnZimbra($domainName)
+    {
+        $this->zasa->createDomain($domainName, []);
+    }
 }
