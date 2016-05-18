@@ -205,6 +205,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function deleteDomain($domainName)
     {
-        $this->zasa->getDomainId($domainName);
+        $id = $this->zasa->getDomainId($domainName);
+        $this->zasa->deleteDomain($id);
     }
 }
