@@ -203,9 +203,14 @@ class ZasaModule extends Module implements MultiSession
         $this->zasa->createDomain($domainName, []);
     }
 
-    public function deleteDomain($domainName)
+    public function deleteDomainOnZimbra($domainName)
     {
         $id = $this->zasa->getDomainId($domainName);
         $this->zasa->deleteDomain($id);
+    }
+
+    public function createMailboxOnZimbra($mailboxName, $password)
+    {
+        $this->zasa->createAccount($mailboxName, $password, []);
     }
 }

@@ -16,7 +16,7 @@ class DeleteDomainOnZimbraTest extends ZasaModuleTestCase
      */
     public function shouldGetDomainIdFromZasa()
     {
-        $this->module->deleteDomain('example.com');
+        $this->module->deleteDomainOnZimbra('example.com');
         $this->zasa->shouldHaveReceived('getDomainId')->with('example.com')->once();
     }
 
@@ -25,7 +25,7 @@ class DeleteDomainOnZimbraTest extends ZasaModuleTestCase
      */
     public function shouldCallDeleteDomainOnZasaWithIdReturnedFromGetDomainId()
     {
-        $this->module->deleteDomain(null);
+        $this->module->deleteDomainOnZimbra(null);
         $this->zasa->shouldHaveReceived('deleteDomain')->with('sample-domain-id')->once();
     }
 
