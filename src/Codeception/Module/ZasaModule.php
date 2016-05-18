@@ -213,4 +213,9 @@ class ZasaModule extends Module implements MultiSession
     {
         $this->zasa->createAccount($mailboxName, $password, []);
     }
+
+    public function deleteMailboxOnZimbra($mailboxName)
+    {
+        $this->zasa->getAccountId($mailboxName);
+    }
 }
