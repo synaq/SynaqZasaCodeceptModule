@@ -216,6 +216,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function deleteMailboxOnZimbra($mailboxName)
     {
-        $this->zasa->getAccountId($mailboxName);
+        $id = $this->zasa->getAccountId($mailboxName);
+        $this->zasa->deleteAccount($id);
     }
 }
