@@ -15,9 +15,27 @@ class CreateMailboxOnZimbraTest extends ZasaModuleTestCase
     /**
      * @test
      */
-    public function shouldCallCreateMailboxOnZasa()
+    public function shouldCallCreateMailboxOnZasaWithAddress()
     {
-        $this->module->createMailboxOnZimbra('test@example.com', 'some-password');
-        $this->zasa->shouldHaveReceived('createAccount')->with('test@example.com', 'some-password', m::any());
+        $this->module->createMailboxOnZimbra('test@example.com', null);
+        $this->zasa->shouldHaveReceived('createAccount')->with('test@example.com', m::any(), m::any())->once();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCallCreateMailboxOnZasaWithPassword()
+    {
+        $this->module->createMailboxOnZimbra(null, 'some-password');
+        $this->zasa->shouldHaveReceived('createAccount')->with(m::any(), 'some-password', m::any());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCallCreateMailboxOnZasaWithAddressAsSn()
+    {
+        $this->module->createMailboxOnZimbra('test@example.com', null);
+        $this->zasa->shouldHaveReceived('createAccount')->with(m::any(), m::any(), ['sn' => 'test@example.com']);
     }
 }
