@@ -2,3 +2,4 @@
 vendor/
 .floo
 .flooignore
+.vagrant

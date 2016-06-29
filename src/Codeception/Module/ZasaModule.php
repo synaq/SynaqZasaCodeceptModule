@@ -197,4 +197,26 @@ class ZasaModule extends Module implements MultiSession
 
         return $ret;
     }
+
+    public function createDomainOnZimbra($domainName)
+    {
+        $this->zasa->createDomain($domainName, ['zimbraDomainStatus' => 'active']);
+    }
+
+    public function deleteDomainOnZimbra($domainName)
+    {
+        $id = $this->zasa->getDomainId($domainName);
+        $this->zasa->deleteDomain($id);
+    }
+
+    public function createMailboxOnZimbra($mailboxName, $password)
+    {
+        $this->zasa->createAccount($mailboxName, $password, ['sn' => $mailboxName]);
+    }
+
+    public function deleteMailboxOnZimbra($mailboxName)
+    {
+        $id = $this->zasa->getAccountId($mailboxName);
+        $this->zasa->deleteAccount($id);
+    }
 }
