@@ -200,7 +200,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function createDomainOnZimbra($domainName)
     {
-        $this->zasa->createDomain($domainName, []);
+        $this->zasa->createDomain($domainName, ['zimbraDomainStatus' => 'active']);
     }
 
     public function deleteDomainOnZimbra($domainName)

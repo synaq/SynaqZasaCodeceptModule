@@ -20,4 +20,13 @@ class CreateDomainOnZimbraTest extends ZasaModuleTestCase
         $this->module->createDomainOnZimbra('example.com');
         $this->zasa->shouldHaveReceived('createDomain')->with('example.com', m::any());
     }
+
+    /**
+     * @test
+     */
+    public function shouldCallCreateDomainOnZasaConnectorWithDomainStatusAttributeSetToActive()
+    {
+        $this->module->createDomainOnZimbra(null);
+        $this->zasa->shouldHaveReceived('createDomain')->with(m::any(), ['zimbraDomainStatus' => 'active']);
+    }
 }
