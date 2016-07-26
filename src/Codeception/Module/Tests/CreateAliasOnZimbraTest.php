@@ -16,10 +16,29 @@ class CreateAliasOnZimbraTest extends ZasaModuleTestCase
     /**
      * @test
      */
+    public function shouldCallGetAccountIdWithMailboxAddressOnce()
+    {
+        $this->module->createAliasOnZimbra('mailbox@domain.com', null);
+        $this->zasa->shouldHaveReceived('getAccountId')->once();
+    }
+
+    /**
+     * @test
+     */
     public function shouldCallGetAccountIdWithMailboxAddress()
     {
         $this->module->createAliasOnZimbra('mailbox@domain.com', null);
-        $this->zasa->shouldHaveReceived('getAccountId')->with('mailbox@domain.com')->once();
+        $this->zasa->shouldHaveReceived('getAccountId')->with('mailbox@domain.com');
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCallAddAccountAliasOnce()
+    {
+        $this->zasa->shouldReceive('getAccountId')->andReturn('mailbox-id');
+        $this->module->createAliasOnZimbra(null, null);
+        $this->zasa->shouldHaveReceived('addAccountAlias')->once();
     }
 
     /**
@@ -29,6 +48,6 @@ class CreateAliasOnZimbraTest extends ZasaModuleTestCase
     {
         $this->zasa->shouldReceive('getAccountId')->andReturn('mailbox-id');
         $this->module->createAliasOnZimbra(null, null);
-        $this->zasa->shouldHaveReceived('addAccountAlias')->with('mailbox-id', m::any())->once();
+        $this->zasa->shouldHaveReceived('addAccountAlias')->with('mailbox-id', m::any());
     }
 }
