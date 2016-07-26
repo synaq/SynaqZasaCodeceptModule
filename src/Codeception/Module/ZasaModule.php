@@ -222,6 +222,7 @@ class ZasaModule extends Module implements MultiSession
 
     public function createAliasOnZimbra($mailboxAddress, $aliasAddress)
     {
-        $this->zasa->getAccountId($mailboxAddress);
+        $id = $this->zasa->getAccountId($mailboxAddress);
+        $this->zasa->addAccountAlias($id, null);
     }
 }

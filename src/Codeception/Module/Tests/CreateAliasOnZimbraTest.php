@@ -9,6 +9,8 @@
 namespace Codeception\Module\Tests;
 
 
+use Mockery as m;
+
 class CreateAliasOnZimbraTest extends ZasaModuleTestCase
 {
     /**
@@ -17,6 +19,16 @@ class CreateAliasOnZimbraTest extends ZasaModuleTestCase
     public function shouldCallGetAccountIdWithMailboxAddress()
     {
         $this->module->createAliasOnZimbra('mailbox@domain.com', null);
-        $this->zasa->shouldHaveReceived('getAccountId')->with('mailbox@domain.com');
+        $this->zasa->shouldHaveReceived('getAccountId')->with('mailbox@domain.com')->once();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCallAddAccountAliasWithIdReturnedFromGetAccountId()
+    {
+        $this->zasa->shouldReceive('getAccountId')->andReturn('mailbox-id');
+        $this->module->createAliasOnZimbra(null, null);
+        $this->zasa->shouldHaveReceived('addAccountAlias')->with('mailbox-id', m::any())->once();
     }
 }
