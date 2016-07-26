@@ -50,4 +50,13 @@ class CreateAliasOnZimbraTest extends ZasaModuleTestCase
         $this->module->createAliasOnZimbra(null, null);
         $this->zasa->shouldHaveReceived('addAccountAlias')->with('mailbox-id', m::any());
     }
+
+    /**
+     * @test
+     */
+    public function shouldCallAddAccountAliasWithAliasAddress()
+    {
+        $this->module->createAliasOnZimbra(null, 'alias@domain.com');
+        $this->zasa->shouldHaveReceived('addAccountAlias')->with(m::any(), 'alias@domain.com');
+    }
 }
