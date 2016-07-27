@@ -49,4 +49,13 @@ class RemoveAliasOnZimbraTest extends ZasaModuleTestCase
         $this->module->removeAliasOnZimbra(null, null);
         $this->zasa->shouldHaveReceived('removeAccountAlias')->with('mailbox-id', m::any());
     }
+
+    /**
+     * @test
+     */
+    public function shouldCallRemoveAccountAliasWithAliasAddress()
+    {
+        $this->module->removeAliasOnZimbra(null, 'alias@domain.com');
+        $this->zasa->shouldHaveReceived('removeAccountAlias')->with(m::any(), 'alias@domain.com');
+    }
 }

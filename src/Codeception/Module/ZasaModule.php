@@ -229,6 +229,6 @@ class ZasaModule extends Module implements MultiSession
     public function removeAliasOnZimbra($mailboxAddress, $aliasAddress)
     {
         $accountId = $this->zasa->getAccountId($mailboxAddress);
-        $this->zasa->removeAccountAlias($accountId, null);
+        $this->zasa->removeAccountAlias($accountId, $aliasAddress);
     }
 }
