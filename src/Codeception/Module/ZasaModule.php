@@ -225,4 +225,10 @@ class ZasaModule extends Module implements MultiSession
         $id = $this->zasa->getAccountId($mailboxAddress);
         $this->zasa->addAccountAlias($id, $aliasAddress);
     }
+
+    public function removeAliasOnZimbra($mailboxAddress, $aliasAddress)
+    {
+        $accountId = $this->zasa->getAccountId($mailboxAddress);
+        $this->zasa->removeAccountAlias($accountId, $aliasAddress);
+    }
 }
