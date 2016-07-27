@@ -9,6 +9,8 @@
 namespace Codeception\Module\Tests;
 
 
+use Mockery as m;
+
 class RemoveAliasOnZimbraTest extends ZasaModuleTestCase
 {
     /**
@@ -36,5 +38,15 @@ class RemoveAliasOnZimbraTest extends ZasaModuleTestCase
     {
         $this->module->removeAliasOnZimbra(null, null);
         $this->zasa->shouldHaveReceived('removeAccountAlias')->once();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCallRemoveAccountAliasWithIdReturnedFromGetAccountId()
+    {
+        $this->zasa->shouldReceive('getAccountId')->andReturn('mailbox-id');
+        $this->module->removeAliasOnZimbra(null, null);
+        $this->zasa->shouldHaveReceived('removeAccountAlias')->with('mailbox-id', m::any());
     }
 }
