@@ -8,16 +8,16 @@
         }
     ],
     "require": {
-        "synaq/zasa-bundle": "1.5",
-	    "codeception/codeception": "^2.1"
+        "synaq/zasa-bundle": "^2.2.2",
+	    "codeception/codeception": "2.1.*"
     },
     "require-dev": {
-        "mockery/mockery": "dev-master"
+        "mockery/mockery": "^0.9.5"
     },
     "autoload": {
         "psr-4": {
             "Codeception\\Module\\": "src/Codeception/Module"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
