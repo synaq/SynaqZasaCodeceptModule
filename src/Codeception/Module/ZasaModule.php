@@ -11,7 +11,7 @@ namespace Codeception\Module;
 use Codeception\Lib\Interfaces\MultiSession;
 use Codeception\Lib\ModuleContainer;
 use Codeception\Module;
-use Codeception\TestInterface;
+use Codeception\TestCase;
 use Synaq\CurlBundle\Curl\Wrapper;
 use Synaq\ZasaBundle\Connector\ZimbraConnector;
 
@@ -101,7 +101,7 @@ class ZasaModule extends Module implements MultiSession
         $this->_initializeSession();
     }
 
-    public function _before(TestInterface $test) {
+    public function _before(TestCase $test) {
         $this->_initializeSession();
         $this->result = array();
     }
