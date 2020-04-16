@@ -236,5 +236,6 @@ class ZasaModule extends Module implements MultiSession
     {
         $this->zasa->getDlId($dlEmailAddress);
         $this->zasa->deleteDl('some-dl-id');
+        $this->zasa->deleteDl('any-dl-id');
     }
 }

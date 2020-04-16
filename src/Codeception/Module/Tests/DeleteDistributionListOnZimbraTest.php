@@ -10,7 +10,7 @@ class DeleteDistributionListOnZimbraTest extends ZasaModuleTestCase
     public function callsGetDlIdWithEmailAddress()
     {
         $this->module->deleteDistributionListOnZimbra('foo@bar.com');
-        $this->zasa->shouldHaveReceived('getDlId')->with('foo@bar.com')->once();
+        $this->zasa->shouldHaveReceived('getDlId')->with('foo@bar.com');
     }
 
     /**
@@ -19,7 +19,7 @@ class DeleteDistributionListOnZimbraTest extends ZasaModuleTestCase
     public function acceptsAnyDlEmailAddress()
     {
         $this->module->deleteDistributionListOnZimbra('bar@baz.com');
-        $this->zasa->shouldHaveReceived('getDlId')->with('bar@baz.com')->once();
+        $this->zasa->shouldHaveReceived('getDlId')->with('bar@baz.com');
     }
 
     /**
@@ -29,6 +29,16 @@ class DeleteDistributionListOnZimbraTest extends ZasaModuleTestCase
     {
         $this->zasa->shouldReceive('getDlId')->andReturn('some-dl-id');
         $this->module->deleteDistributionListOnZimbra(null);
-        $this->zasa->shouldHaveReceived('deleteDl')->with('some-dl-id')->once();
+        $this->zasa->shouldHaveReceived('deleteDl')->with('some-dl-id');
+    }
+
+    /**
+     * @test
+     */
+    public function acceptsAnyReturnedId()
+    {
+        $this->zasa->shouldReceive('getDlId')->andReturn('any-dl-id');
+        $this->module->deleteDistributionListOnZimbra(null);
+        $this->zasa->shouldHaveReceived('deleteDl')->with('any-dl-id');
     }
 }
