@@ -12,4 +12,13 @@ class DeleteDistributionListOnZimbraTest extends ZasaModuleTestCase
         $this->module->deleteDistributionListOnZimbra('foo@bar.com');
         $this->zasa->shouldHaveReceived('getDlId')->with('foo@bar.com')->once();
     }
+
+    /**
+     * @test
+     */
+    public function acceptsAnyDlEmailAddress()
+    {
+        $this->module->deleteDistributionListOnZimbra('bar@baz.com');
+        $this->zasa->shouldHaveReceived('getDlId')->with('bar@baz.com')->once();
+    }
 }
