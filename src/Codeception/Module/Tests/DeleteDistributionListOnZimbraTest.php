@@ -41,4 +41,14 @@ class DeleteDistributionListOnZimbraTest extends ZasaModuleTestCase
         $this->module->deleteDistributionListOnZimbra(null);
         $this->zasa->shouldHaveReceived('deleteDl')->with('any-dl-id');
     }
+
+    /**
+     * @test
+     */
+    public function onlyCallsDeleteOnce()
+    {
+        $this->zasa->shouldReceive('getDlId')->andReturn('any-dl-id');
+        $this->module->deleteDistributionListOnZimbra(null);
+        $this->zasa->shouldHaveReceived('deleteDl')->once();
+    }
 }
