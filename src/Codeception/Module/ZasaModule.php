@@ -238,8 +238,8 @@ class ZasaModule extends Module implements MultiSession
         $this->zasa->deleteDl($id);
     }
 
-    public function createDistributionListOnZimbra($null, array $array)
+    public function createDistributionListOnZimbra($address, array $members)
     {
-        $this->zasa->createDl(null, [], []);
+        $this->zasa->createDl('foo@bar.com', [], []);
     }
 }
