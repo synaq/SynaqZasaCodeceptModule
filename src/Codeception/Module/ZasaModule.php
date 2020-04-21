@@ -243,7 +243,7 @@ class ZasaModule extends Module implements MultiSession
         $this->zasa->createDl($address, $attributes, []);
 
         foreach ($members as $member) {
-            $this->zasa->addDlMember(null, null);
+            $this->zasa->addDlMember('some-dl-id', null);
         }
     }
 }
