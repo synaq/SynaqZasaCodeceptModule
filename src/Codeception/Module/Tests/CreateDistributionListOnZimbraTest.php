@@ -106,4 +106,13 @@ class CreateDistributionListOnZimbraTest extends ZasaModuleTestCase
         $this->module->createDistributionListOnZimbra(null, [], ['foo@bar.com']);
         $this->zasa->shouldHaveReceived('addDlMember')->with(m::any(), 'foo@bar.com');
     }
+
+    /**
+     * @test
+     */
+    public function acceptsAnyGivenMemberAddress()
+    {
+        $this->module->createDistributionListOnZimbra(null, [], ['bar@baz.com']);
+        $this->zasa->shouldHaveReceived('addDlMember')->with(m::any(), 'bar@baz.com');
+    }
 }
