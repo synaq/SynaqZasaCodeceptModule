@@ -41,4 +41,13 @@ class CreateDistributionListOnZimbraTest extends ZasaModuleTestCase
         $this->module->createDistributionListOnZimbra(null, ['zimbraFoo' => 'zimbraBar'], []);
         $this->zasa->shouldHaveReceived('createDl')->with(m::any(), ['zimbraFoo' => 'zimbraBar'], m::any());
     }
+
+    /**
+     * @test
+     */
+    public function acceptsAnyAttributes()
+    {
+        $this->module->createDistributionListOnZimbra(null, ['zimbraBar' => 'baz'], []);
+        $this->zasa->shouldHaveReceived('createDl')->with(m::any(), ['zimbraBar' => 'baz'], m::any());
+    }
 }
