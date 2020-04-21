@@ -241,8 +241,9 @@ class ZasaModule extends Module implements MultiSession
     public function createDistributionListOnZimbra($address, array $attributes, array $members)
     {
         $this->zasa->createDl($address, $attributes, []);
-        $this->zasa->addDlMember(null, null);
-        $this->zasa->addDlMember(null, null);
 
+        foreach ($members as $member) {
+            $this->zasa->addDlMember(null, null);
+        }
     }
 }
