@@ -5,7 +5,8 @@ RUN apt-get update && \
 RUN docker-php-ext-install zip
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
-RUN pecl install xdebug
+RUN pecl channel-update pecl.php.net
+RUN pecl install xdebug-2.5.5
 RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20121212/xdebug.so" > /usr/local/etc/php/conf.d/pecl-xdebug.ini
 RUN echo "xdebug.remote_host="`/sbin/ip route | /usr/bin/awk '/default/ { print $3 }'` >> /usr/local/etc/php/conf.d/pecl-xdebug.ini
 RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/pecl-xdebug.ini && \
@@ -15,6 +16,7 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/pecl-xdebug.ini 
     echo "xdebug.profiler_enable=0" >> /usr/local/etc/php/conf.d/pecl-xdebug.ini && \
     echo 'xdebug.profiler_output_dir="/opt/project"' >> /usr/local/etc/php/conf.d/pecl-xdebug.ini && \
     echo "xdebug.remote_port=9000" >> /usr/local/etc/php/conf.d/pecl-xdebug.ini
+RUN echo "memory_limit=6144M" > /usr/local/etc/php/conf.d/memory.ini
 WORKDIR /tmp/composerCache
 COPY composer.json ./
 COPY composer.lock ./

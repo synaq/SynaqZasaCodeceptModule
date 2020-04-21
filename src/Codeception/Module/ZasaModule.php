@@ -231,4 +231,19 @@ class ZasaModule extends Module implements MultiSession
         $accountId = $this->zasa->getAccountId($mailboxAddress);
         $this->zasa->removeAccountAlias($accountId, $aliasAddress);
     }
+
+    public function deleteDistributionListOnZimbra($dlEmailAddress)
+    {
+        $id = $this->zasa->getDlId($dlEmailAddress);
+        $this->zasa->deleteDl($id);
+    }
+
+    public function createDistributionListOnZimbra($address, array $attributes, array $members)
+    {
+        $id = $this->zasa->createDl($address, $attributes, []);
+
+        foreach ($members as $member) {
+            $this->zasa->addDlMember($id, $member);
+        }
+    }
 }
