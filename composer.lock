@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "529947e502f2a6af7da97def4fbf9c8e",
+    "content-hash": "ea9b5f4a617c93def1203184579eafdf",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -3476,28 +3476,28 @@
         },
         {
             "name": "synaq/zasa-bundle",
-            "version": "2.2.2",
+            "version": "3.1",
             "target-dir": "Synaq/ZasaBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/synaq/SynaqZasaBundle.git",
-                "reference": "9f37cd6c57037c5c9fc2e5fe63b915486e79cc8f"
+                "reference": "f5d82a2aff0198e1896bfc322b635dd731c1ffe3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/9f37cd6c57037c5c9fc2e5fe63b915486e79cc8f",
-                "reference": "9f37cd6c57037c5c9fc2e5fe63b915486e79cc8f",
+                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/f5d82a2aff0198e1896bfc322b635dd731c1ffe3",
+                "reference": "f5d82a2aff0198e1896bfc322b635dd731c1ffe3",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "^2.7.34",
+                "php": "^5.4|^7",
+                "symfony/framework-bundle": "^2.5|^3.4",
                 "synaq/curl-bundle": "^1.0"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.5",
-                "phpunit/phpunit": "^4.8"
+                "phpunit/phpunit": "^4.8|^5"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -3510,6 +3510,10 @@
                 {
                     "name": "Nic Parry",
                     "email": "nicjparry@gmail.com"
+                },
+                {
+                    "name": "Willem Viljoen",
+                    "email": "willemv@synaq.com"
                 }
             ],
             "description": "A Symfony2 wrapper for the Zimbra Soap Admin API (ZASA)",
@@ -3519,7 +3523,7 @@
                 "api",
                 "zimbra"
             ],
-            "time": "2017-09-27T10:54:39+00:00"
+            "time": "2020-04-22T09:15:41+00:00"
         },
         {
             "name": "webmozart/assert",
