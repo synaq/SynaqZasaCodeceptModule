@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea9b5f4a617c93def1203184579eafdf",
+    "content-hash": "694fc1bfbd0da50a5003203541442804",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -3476,17 +3476,17 @@
         },
         {
             "name": "synaq/zasa-bundle",
-            "version": "3.1",
+            "version": "3.1.1",
             "target-dir": "Synaq/ZasaBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/synaq/SynaqZasaBundle.git",
-                "reference": "f5d82a2aff0198e1896bfc322b635dd731c1ffe3"
+                "reference": "67af2427348cf15df5e7ff1f9d5a37ccfbbf9228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/f5d82a2aff0198e1896bfc322b635dd731c1ffe3",
-                "reference": "f5d82a2aff0198e1896bfc322b635dd731c1ffe3",
+                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/67af2427348cf15df5e7ff1f9d5a37ccfbbf9228",
+                "reference": "67af2427348cf15df5e7ff1f9d5a37ccfbbf9228",
                 "shasum": ""
             },
             "require": {
@@ -3523,7 +3523,7 @@
                 "api",
                 "zimbra"
             ],
-            "time": "2020-04-22T09:15:41+00:00"
+            "time": "2020-04-24T14:25:32+00:00"
         },
         {
             "name": "webmozart/assert",
