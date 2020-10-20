@@ -301,6 +301,6 @@ class ZasaModule extends Module implements MultiSession
      */
     public function getCalendarResourceFromZimbra($name)
     {
-        $this->zasa->getCalendarResource('foo@bar.com');
+        $this->zasa->getCalendarResource($name);
     }
 }

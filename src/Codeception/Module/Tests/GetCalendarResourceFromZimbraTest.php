@@ -26,4 +26,14 @@ class GetCalendarResourceFromZimbraTest extends ZasaModuleTestCase
         $this->module->getCalendarResourceFromZimbra('foo@bar.com');
         $this->zasa->shouldHaveReceived('getCalendarResource')->with('foo@bar.com');
     }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyName()
+    {
+        $this->module->getCalendarResourceFromZimbra('bar@baz.com');
+        $this->zasa->shouldHaveReceived('getCalendarResource')->with('bar@baz.com');
+    }
 }
