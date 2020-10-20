@@ -14,6 +14,7 @@ use Codeception\Module;
 use Codeception\TestCase;
 use Synaq\CurlBundle\Curl\Wrapper;
 use Synaq\ZasaBundle\Connector\ZimbraConnector;
+use Synaq\ZasaBundle\Exception\SoapFaultException;
 
 /**
  * Class ZasaModule
@@ -247,8 +248,16 @@ class ZasaModule extends Module implements MultiSession
         }
     }
 
+    /**
+     * @param string $name
+     * @param string $password
+     * @param string $displayName
+     * @param string $resourceType
+     * @param array $otherAttributes
+     * @throws SoapFaultException
+     */
     public function createCalendarResourceOnZimbra($name, $password = null, $displayName = null, $resourceType = null, $otherAttributes = [])
     {
-        $this->zasa->createCalendarResource(null, null, null, null, []);
+        $this->zasa->createCalendarResource('foo@bar.com', null, null, null, []);
     }
 }
