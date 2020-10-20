@@ -84,8 +84,10 @@ class ZasaModule extends Module implements MultiSession
      */
     public function seeResultFromZimbraContains(array $subset)
     {
-        $this->assertTrue(($this->arrayIntersectAssocRecursive($subset, $this->result) == $subset),
-            "I don't see that " . json_encode($this->result) . " contains " . json_encode($subset));
+        $this->assertTrue(
+            ($this->arrayIntersectAssocRecursive($subset, $this->result) == $subset),
+            "I don't see that ".json_encode($this->result)." contains ".json_encode($subset)
+        );
     }
 
     /**
@@ -93,8 +95,10 @@ class ZasaModule extends Module implements MultiSession
      */
     public function dontSeeResultFromZimbraContains(array $subset)
     {
-        $this->assertFalse(($this->arrayIntersectAssocRecursive($subset, $this->result) == $subset),
-            "I see that " . json_encode($this->result) . " contains " . json_encode($subset));
+        $this->assertFalse(
+            ($this->arrayIntersectAssocRecursive($subset, $this->result) == $subset),
+            "I see that ".json_encode($this->result)." contains ".json_encode($subset)
+        );
     }
 
     public function _initialize()
@@ -102,7 +106,8 @@ class ZasaModule extends Module implements MultiSession
         $this->_initializeSession();
     }
 
-    public function _before(TestCase $test) {
+    public function _before(TestCase $test)
+    {
         $this->_initializeSession();
         $this->result = array();
     }
@@ -114,8 +119,8 @@ class ZasaModule extends Module implements MultiSession
     public function _backupSession()
     {
         return [
-            'client'    => $this->client,
-            'zasa'    => $this->zasa
+            'client' => $this->client,
+            'zasa' => $this->zasa,
         ];
     }
 
@@ -133,21 +138,24 @@ class ZasaModule extends Module implements MultiSession
 
     private function _zasaCreate()
     {
-        if (is_null($this->client))
-        {
-            $this->client = new Wrapper(null, false, true, false, array(
+        if (is_null($this->client)) {
+            $this->client = new Wrapper(
+                null, false, true, false, array(
                 'CURLOPT_RETURNTRANSFER' => true,
                 'CURLOPT_SSL_VERIFYPEER' => false,
                 'CURLOPT_SSL_VERIFYHOST' => false,
-                'CURLOPT_SSLVERSION' => 1
-            ));
+                'CURLOPT_SSLVERSION' => 1,
+            )
+            );
         }
 
         if (is_null($this->zasa)) {
-            $zasa = new ZimbraConnector($this->client,
+            $zasa = new ZimbraConnector(
+                $this->client,
                 $this->config['server'],
                 $this->config['admin_user'],
-                $this->config['admin_pass']);
+                $this->config['admin_pass']
+            );
 
             $this->zasa = $zasa;
         }
@@ -162,14 +170,14 @@ class ZasaModule extends Module implements MultiSession
     }
 
     /**
-     * @author nleippe@integr8ted.com
-     * @author tiger.seo@gmail.com
-     * @link http://www.php.net/manual/en/function.array-intersect-assoc.php#39822
-     *
      * @param mixed $arr1
      * @param mixed $arr2
      *
      * @return array|bool
+     * @author nleippe@integr8ted.com
+     * @author tiger.seo@gmail.com
+     * @link http://www.php.net/manual/en/function.array-intersect-assoc.php#39822
+     *
      */
     private function arrayIntersectAssocRecursive($arr1, $arr2)
     {
@@ -192,7 +200,9 @@ class ZasaModule extends Module implements MultiSession
         if (empty($commonkeys)) {
             foreach ($arr2 as $arr) {
                 $_return = $this->arrayIntersectAssocRecursive($arr1, $arr);
-                if ($_return && $_return == $arr1) return $_return;
+                if ($_return && $_return == $arr1) {
+                    return $_return;
+                }
             }
         }
 
@@ -256,12 +266,32 @@ class ZasaModule extends Module implements MultiSession
      * @param array $otherAttributes
      * @throws SoapFaultException
      */
-    public function createCalendarResourceOnZimbra($name, $password = null, $displayName = 'Test Calendar Resource', $resourceType = 'Location', $otherAttributes = [])
+    public function createCalendarResourceOnZimbra(
+        $name,
+        $password = null,
+        $displayName = 'Test Calendar Resource',
+        $resourceType = 'Location',
+        array $otherAttributes = []
+    ) {
+        $this->zasa->createCalendarResource(
+            $name,
+            $this->randomPasswordIfEmpty($password),
+            $displayName,
+            $resourceType,
+            $otherAttributes
+        );
+    }
+
+    /**
+     * @param $password
+     * @return string
+     */
+    private function randomPasswordIfEmpty($password)
     {
         if (empty($password)) {
-            $password = substr(md5(rand()), 0, 6) . 'A$';
+            $password = substr(md5(rand()), 0, 6).'A$';
         }
 
-        $this->zasa->createCalendarResource($name, $password, $displayName, $resourceType, ['foo' => 'bar']);
+        return $password;
     }
 }
