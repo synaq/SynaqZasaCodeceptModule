@@ -119,4 +119,14 @@ class CreateCalendarResourceOnZimbraTest extends ZasaModuleTestCase
         $this->module->createCalendarResourceOnZimbra(null, null, null, 'Equipment');
         $this->zasa->shouldHaveReceived('createCalendarResource')->with(m::any(), m::any(), m::any(), 'Equipment', m::any());
     }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function usesTheLocationTypeIfNoTypeIsSpecified()
+    {
+        $this->module->createCalendarResourceOnZimbra(null, null, null);
+        $this->zasa->shouldHaveReceived('createCalendarResource')->with(m::any(), m::any(), m::any(), 'Location', m::any());
+    }
 }
