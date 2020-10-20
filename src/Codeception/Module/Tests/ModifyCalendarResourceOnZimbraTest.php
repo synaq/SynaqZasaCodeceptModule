@@ -28,6 +28,17 @@ class ModifyCalendarResourceOnZimbraTest extends ZasaModuleTestCase
         $this->zasa->shouldHaveReceived('modifyCalendarResource')->with('SOME-ID', m::any());
     }
 
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyGivenNameAndId()
+    {
+        $this->zasa->shouldReceive('getCalendarResource')->with('bar@baz.com')->andReturn(['id' => 'ANY-ID']);
+        $this->module->modifyCalendarResourceOnZimbra('bar@baz.com', []);
+        $this->zasa->shouldHaveReceived('modifyCalendarResource')->with('ANY-ID', m::any());
+    }
+
     protected function setUp()
     {
         parent::setUp();

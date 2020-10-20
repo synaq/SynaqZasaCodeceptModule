@@ -311,6 +311,7 @@ class ZasaModule extends Module implements MultiSession
      */
     public function modifyCalendarResourceOnZimbra($name, array $attributes)
     {
-        $this->zasa->modifyCalendarResource('SOME-ID', []);
+        $physicalResource = $this->zasa->getCalendarResource($name);
+        $this->zasa->modifyCalendarResource($physicalResource['id'], []);
     }
 }
