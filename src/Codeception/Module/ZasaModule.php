@@ -294,4 +294,13 @@ class ZasaModule extends Module implements MultiSession
 
         return $password;
     }
+
+    /**
+     * @param $name
+     * @throws SoapFaultException
+     */
+    public function getCalendarResourceFromZimbra($name)
+    {
+        $this->zasa->getCalendarResource(null);
+    }
 }
