@@ -258,6 +258,10 @@ class ZasaModule extends Module implements MultiSession
      */
     public function createCalendarResourceOnZimbra($name, $password = null, $displayName = null, $resourceType = null, $otherAttributes = [])
     {
+        if (empty($password)) {
+            $password = substr(md5(rand()), 0, 6) . 'A$';
+        }
+
         $this->zasa->createCalendarResource($name, $password, null, null, []);
     }
 }
