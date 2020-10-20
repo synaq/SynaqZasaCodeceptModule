@@ -246,4 +246,9 @@ class ZasaModule extends Module implements MultiSession
             $this->zasa->addDlMember($id, $member);
         }
     }
+
+    public function createCalendarResourceOnZimbra($name, $password = null, $displayName = null, $resourceType = null, $otherAttributes = [])
+    {
+        $this->zasa->createCalendarResource(null, null, null, null, []);
+    }
 }
