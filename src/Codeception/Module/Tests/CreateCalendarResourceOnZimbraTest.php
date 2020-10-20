@@ -36,4 +36,14 @@ class CreateCalendarResourceOnZimbraTest extends ZasaModuleTestCase
         $this->module->createCalendarResourceOnZimbra('bar@baz.com');
         $this->zasa->shouldHaveReceived('createCalendarResource')->with('bar@baz.com', m::any(), m::any(), m::any(), m::any());
     }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function createsCalendarResourceUsingTheGivenPassword()
+    {
+        $this->module->createCalendarResourceOnZimbra(null, 'Testing123$');
+        $this->zasa->shouldHaveReceived('createCalendarResource')->with(m::any(), 'Testing123$', m::any(), m::any(), m::any());
+    }
 }
