@@ -262,6 +262,6 @@ class ZasaModule extends Module implements MultiSession
             $password = substr(md5(rand()), 0, 6) . 'A$';
         }
 
-        $this->zasa->createCalendarResource($name, $password, $displayName, $resourceType, []);
+        $this->zasa->createCalendarResource($name, $password, $displayName, $resourceType, ['foo' => 'bar']);
     }
 }
