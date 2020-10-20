@@ -53,4 +53,29 @@ class GetCalendarResourceFromZimbraTest extends ZasaModuleTestCase
         $result = $this->module->grabResultFromZimbra();
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyResultFromZimbra()
+    {
+        $expected = [
+            'name' => 'bar@bar.com',
+            'displayName' => 'Any Resource',
+            'zimbraCalResType' => 'Equipment',
+            'zimbraHideInGal' => 'TRUE'
+        ];
+        $this->zasa->shouldReceive('getCalendarResource')->andReturn($expected);
+        $this->module->getCalendarResourceFromZimbra(null);
+        $result = $this->module->grabResultFromZimbra();
+        $this->assertEquals($expected, $result);
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->zasa->shouldReceive('getCalendarResource')->andReturn([])->byDefault();
+    }
 }
