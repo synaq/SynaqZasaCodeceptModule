@@ -256,7 +256,7 @@ class ZasaModule extends Module implements MultiSession
      * @param array $otherAttributes
      * @throws SoapFaultException
      */
-    public function createCalendarResourceOnZimbra($name, $password = null, $displayName = null, $resourceType = null, $otherAttributes = [])
+    public function createCalendarResourceOnZimbra($name, $password = null, $displayName = 'Test Calendar Resource', $resourceType = null, $otherAttributes = [])
     {
         if (empty($password)) {
             $password = substr(md5(rand()), 0, 6) . 'A$';
