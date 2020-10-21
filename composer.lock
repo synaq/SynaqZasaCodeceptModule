@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "694fc1bfbd0da50a5003203541442804",
+    "content-hash": "6cf8b0510825a5c2c2afca97c528f38c",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -1115,6 +1115,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2017-02-27T10:12:30+00:00"
         },
         {
@@ -3476,17 +3477,16 @@
         },
         {
             "name": "synaq/zasa-bundle",
-            "version": "3.1.1",
-            "target-dir": "Synaq/ZasaBundle",
+            "version": "4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/synaq/SynaqZasaBundle.git",
-                "reference": "67af2427348cf15df5e7ff1f9d5a37ccfbbf9228"
+                "reference": "99112e218e5a9c739ee71870028788af59d0b029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/67af2427348cf15df5e7ff1f9d5a37ccfbbf9228",
-                "reference": "67af2427348cf15df5e7ff1f9d5a37ccfbbf9228",
+                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/99112e218e5a9c739ee71870028788af59d0b029",
+                "reference": "99112e218e5a9c739ee71870028788af59d0b029",
                 "shasum": ""
             },
             "require": {
@@ -3501,8 +3501,9 @@
             },
             "type": "symfony-bundle",
             "autoload": {
-                "psr-0": {
-                    "Synaq\\ZasaBundle": ""
+                "psr-4": {
+                    "Synaq\\ZasaBundle\\": "",
+                    "Tests\\": "Tests"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3523,7 +3524,7 @@
                 "api",
                 "zimbra"
             ],
-            "time": "2020-04-24T14:25:32+00:00"
+            "time": "2020-08-18T09:58:54+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -3694,7 +3695,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-json": "^1.2"
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
