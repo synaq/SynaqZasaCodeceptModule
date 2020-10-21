@@ -314,4 +314,13 @@ class ZasaModule extends Module implements MultiSession
         $physicalResource = $this->zasa->getCalendarResource($name);
         $this->zasa->modifyCalendarResource($physicalResource['id'], $attributes);
     }
+
+    /**
+     * @param $name
+     * @throws SoapFaultException
+     */
+    public function deleteCalendarResourceOnZimbra($name)
+    {
+        $this->zasa->deleteCalendarResource(null);
+    }
 }
