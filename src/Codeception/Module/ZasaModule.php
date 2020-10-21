@@ -311,8 +311,7 @@ class ZasaModule extends Module implements MultiSession
      */
     public function modifyCalendarResourceOnZimbra($name, array $attributes)
     {
-        $physicalResource = $this->zasa->getCalendarResource($name);
-        $this->zasa->modifyCalendarResource($physicalResource['id'], $attributes);
+        $this->zasa->modifyCalendarResource($this->physicalResourceId($name), $attributes);
     }
 
     /**
@@ -321,6 +320,19 @@ class ZasaModule extends Module implements MultiSession
      */
     public function deleteCalendarResourceOnZimbra($name)
     {
-        $this->zasa->deleteCalendarResource('SOME-ID');
+        $this->zasa->deleteCalendarResource($this->physicalResourceId($name));
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     * @throws SoapFaultException
+     */
+    private function physicalResourceId($name)
+    {
+        $physicalResource = $this->zasa->getCalendarResource($name);
+        $id = $physicalResource['id'];
+
+        return $id;
     }
 }

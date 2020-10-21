@@ -27,6 +27,17 @@ class DeleteCalendarResourceOnZimbraTest extends ZasaModuleTestCase
         $this->zasa->shouldHaveReceived('deleteCalendarResource')->with('SOME-ID');
     }
 
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyGivenNameAndId()
+    {
+        $this->zasa->shouldReceive('getCalendarResource')->with('bar@baz.com')->andReturn(['id' => 'ANY-ID']);
+        $this->module->deleteCalendarResourceOnZimbra('bar@baz.com');
+        $this->zasa->shouldHaveReceived('deleteCalendarResource')->with('ANY-ID');
+    }
+
     protected function setUp()
     {
         parent::setUp();
