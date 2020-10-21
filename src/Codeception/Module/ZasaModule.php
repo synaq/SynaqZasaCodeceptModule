@@ -321,6 +321,6 @@ class ZasaModule extends Module implements MultiSession
      */
     public function deleteCalendarResourceOnZimbra($name)
     {
-        $this->zasa->deleteCalendarResource(null);
+        $this->zasa->deleteCalendarResource('SOME-ID');
     }
 }
