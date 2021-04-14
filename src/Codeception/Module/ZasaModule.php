@@ -418,8 +418,31 @@ class ZasaModule extends Module implements MultiSession
         return $children;
     }
 
-    public function seeFolderWithAbsolutePath($string)
+    public function seeFolderWithAbsolutePath($path)
     {
+        $this->assertTrue(
+            $this->isAbsolutePathInSomeChildFolder($this->result, $path),
+            "I do not see folder {$path}"
+        );
+    }
 
+    /**
+     * @param array $result
+     * @param $path
+     * @return bool
+     */
+    private function isAbsolutePathInSomeChildFolder(array $result, $path)
+    {
+        if ($result['absolute_path'] === $path) {
+            return true;
+        }
+
+        foreach ($result['children'] as $child) {
+            if ($this->isAbsolutePathInSomeChildFolder($child, $path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
