@@ -12,4 +12,13 @@ class GetFolderStructureFromZimbraTest extends ZasaModuleTestCase
         $this->module->getFolderStructureFromZimbra(null);
         $this->zasa->shouldHaveReceived('getFolders')->once();
     }
+
+    /**
+     * @test
+     */
+    public function callsGetFoldersWithGivenAccountName()
+    {
+        $this->module->getFolderStructureFromZimbra('foo@bar.com');
+        $this->zasa->shouldHaveReceived('getFolders')->with('foo@bar.com');
+    }
 }

@@ -338,6 +338,6 @@ class ZasaModule extends Module implements MultiSession
 
     public function getFolderStructureFromZimbra($accountName)
     {
-        $this->zasa->getFolders(null);
+        $this->zasa->getFolders('foo@bar.com');
     }
 }
