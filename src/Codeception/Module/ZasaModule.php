@@ -417,4 +417,9 @@ class ZasaModule extends Module implements MultiSession
 
         return $children;
     }
+
+    public function seeFolderWithAbsolutePath($string)
+    {
+
+    }
 }
