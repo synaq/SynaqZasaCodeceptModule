@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cf8b0510825a5c2c2afca97c528f38c",
+    "content-hash": "b3d1bb9e320166d024385255e34ab849",
     "packages": [
         {
             "name": "codeception/codeception",
@@ -3477,16 +3477,16 @@
         },
         {
             "name": "synaq/zasa-bundle",
-            "version": "4.4",
+            "version": "5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/synaq/SynaqZasaBundle.git",
-                "reference": "99112e218e5a9c739ee71870028788af59d0b029"
+                "reference": "8e06f98ae44f535b42fffd147676f0ea35a3c7b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/99112e218e5a9c739ee71870028788af59d0b029",
-                "reference": "99112e218e5a9c739ee71870028788af59d0b029",
+                "url": "https://api.github.com/repos/synaq/SynaqZasaBundle/zipball/8e06f98ae44f535b42fffd147676f0ea35a3c7b6",
+                "reference": "8e06f98ae44f535b42fffd147676f0ea35a3c7b6",
                 "shasum": ""
             },
             "require": {
@@ -3524,7 +3524,11 @@
                 "api",
                 "zimbra"
             ],
-            "time": "2020-08-18T09:58:54+00:00"
+            "support": {
+                "issues": "https://github.com/synaq/SynaqZasaBundle/issues",
+                "source": "https://github.com/synaq/SynaqZasaBundle/tree/5.0"
+            },
+            "time": "2021-04-08T11:19:47+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -3698,5 +3702,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

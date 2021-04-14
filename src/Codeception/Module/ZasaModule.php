@@ -335,4 +335,86 @@ class ZasaModule extends Module implements MultiSession
 
         return $id;
     }
+
+    public function getFolderStructureFromZimbra($accountName)
+    {
+        $this->_setResult($this->mapRawFolderResponse($this->zasa->getFolders($accountName)));
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function mapRawFolderResponse($rawFolderResponse)
+    {
+        $rawFolderResponse = $this->sanitizeRootFolder($rawFolderResponse);
+        $folderDetails = $this->folderAttributes($rawFolderResponse);
+        $folderDetails['children'] = $this->folderChildren($rawFolderResponse);
+
+        return $folderDetails;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return mixed
+     */
+    private function sanitizeRootFolder($rawFolderResponse)
+    {
+        if (count(array_keys($rawFolderResponse)) === 1) {
+            $rawFolderResponse = $rawFolderResponse['folder'];
+        }
+
+        return $rawFolderResponse;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function folderAttributes($rawFolderResponse)
+    {
+        $folderDetails = [];
+
+        if (array_key_exists('@attributes', $rawFolderResponse)) {
+            $folderAttributes = $rawFolderResponse['@attributes'];
+            $folderDetails['name'] = $folderAttributes['name'];
+            $folderDetails['absolute_path'] = $folderAttributes['absFolderPath'];
+            $folderDetails['link_target'] = array_key_exists('owner', $folderAttributes) ? $folderAttributes['owner'] : null;
+        }
+
+        return $folderDetails;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function folderChildren($rawFolderResponse)
+    {
+        $children = [];
+
+        if (array_key_exists('folder', $rawFolderResponse)) {
+            $folderResponse = $rawFolderResponse['folder'];
+            if (array_key_exists(0, $folderResponse)) {
+                foreach ($folderResponse as $folderChildResponse) {
+                    $children[] = $this->mapRawFolderResponse($folderChildResponse);
+                }
+            } else {
+                $children[] = $this->mapRawFolderResponse($folderResponse);
+            }
+        }
+
+        if (array_key_exists('link', $rawFolderResponse)) {
+            $linkResponse = $rawFolderResponse['link'];
+            if (array_key_exists(0, $linkResponse)) {
+                foreach ($linkResponse as $linkChildResponse) {
+                    $children[] = $this->mapRawFolderResponse($linkChildResponse);
+                }
+            } else {
+                $children[] = $this->mapRawFolderResponse($linkResponse);
+            }
+        }
+
+        return $children;
+    }
 }

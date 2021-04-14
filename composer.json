@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "synaq/zasa-bundle": "4.4",
+        "synaq/zasa-bundle": "5.0",
 	    "codeception/codeception": "2.1.11",
         "ext-json": "*"
     },
