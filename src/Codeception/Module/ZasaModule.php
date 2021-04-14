@@ -339,5 +339,91 @@ class ZasaModule extends Module implements MultiSession
     public function getFolderStructureFromZimbra($accountName)
     {
         $this->zasa->getFolders($accountName);
+
+        $this->_setResult([
+            'name' => 'USER_ROOT',
+            'absolute_path' => '/',
+            'link_target' => null,
+            'children' => [
+                [
+                    'name' => 'Calendar',
+                    'absolute_path' => '/Calendar',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Briefcase',
+                    'absolute_path' => '/Briefcase',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Chats',
+                    'absolute_path' => '/Chats',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Contacts',
+                    'absolute_path' => '/Contacts',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Drafts',
+                    'absolute_path' => '/Drafts',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Emailed Contacts',
+                    'absolute_path' => '/Emailed Contacts',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Inbox',
+                    'absolute_path' => '/Inbox',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Junk',
+                    'absolute_path' => '/Junk',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Sent',
+                    'absolute_path' => '/Sent',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Tasks',
+                    'absolute_path' => '/Tasks',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Trash',
+                    'absolute_path' => '/Trash',
+                    'link_target' => null,
+                    'children' => []
+                ],
+                [
+                    'name' => 'Archive',
+                    'absolute_path' => '/Archive',
+                    'link_target' => 'bar@bar.com.archive',
+                    'children' => []
+                ],
+                [
+                    'name' => 'Archive_bar',
+                    'absolute_path' => '/Archive_bar',
+                    'link_target' => 'bar@bar.com.archive',
+                    'children' => []
+                ],
+            ]
+        ]);
     }
 }
