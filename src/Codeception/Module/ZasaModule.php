@@ -422,7 +422,7 @@ class ZasaModule extends Module implements MultiSession
     {
         $this->assertTrue(
             $this->isAbsolutePathInSomeChildFolder($this->result, $path),
-            "I do not see folder {$path}"
+            "I do not see the folder {$path}"
         );
     }
 
@@ -444,5 +444,13 @@ class ZasaModule extends Module implements MultiSession
         }
 
         return false;
+    }
+
+    public function dontSeeFolderWithAbsolutePath($path)
+    {
+        $this->assertFalse(
+            $this->isAbsolutePathInSomeChildFolder($this->result, $path),
+            "I see the folder {$path}"
+        );
     }
 }
