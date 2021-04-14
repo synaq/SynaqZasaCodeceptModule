@@ -446,11 +446,40 @@ class ZasaModule extends Module implements MultiSession
         return false;
     }
 
+    /**
+     * @param array $result
+     * @param $path
+     * @param $target
+     * @return bool
+     */
+    private function isAbsolutePathLinkedToTargetInSomeChildFolder(array $result, $path, $target)
+    {
+        if ($result['absolute_path'] === $path && $result['link_target'] === $target) {
+            return true;
+        }
+
+        foreach ($result['children'] as $child) {
+            if ($this->isAbsolutePathLinkedToTargetInSomeChildFolder($child, $path, $target)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function dontSeeFolderWithAbsolutePath($path)
     {
         $this->assertFalse(
             $this->isAbsolutePathInSomeChildFolder($this->result, $path),
             "I see the folder {$path}"
+        );
+    }
+
+    public function seeLinkedFolder($path, $target)
+    {
+        $this->assertTrue(
+            $this->isAbsolutePathLinkedToTargetInSomeChildFolder($this->result, $path, $target),
+            "I do not see a link from the folder /Archive to bar@bar.com.archive"
         );
     }
 }
