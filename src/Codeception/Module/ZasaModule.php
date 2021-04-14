@@ -338,92 +338,83 @@ class ZasaModule extends Module implements MultiSession
 
     public function getFolderStructureFromZimbra($accountName)
     {
-        $this->zasa->getFolders($accountName);
+        $this->_setResult($this->mapRawFolderResponse($this->zasa->getFolders($accountName)));
+    }
 
-        $this->_setResult([
-            'name' => 'USER_ROOT',
-            'absolute_path' => '/',
-            'link_target' => null,
-            'children' => [
-                [
-                    'name' => 'Calendar',
-                    'absolute_path' => '/Calendar',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Briefcase',
-                    'absolute_path' => '/Briefcase',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Chats',
-                    'absolute_path' => '/Chats',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Contacts',
-                    'absolute_path' => '/Contacts',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Drafts',
-                    'absolute_path' => '/Drafts',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Emailed Contacts',
-                    'absolute_path' => '/Emailed Contacts',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Inbox',
-                    'absolute_path' => '/Inbox',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Junk',
-                    'absolute_path' => '/Junk',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Sent',
-                    'absolute_path' => '/Sent',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Tasks',
-                    'absolute_path' => '/Tasks',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Trash',
-                    'absolute_path' => '/Trash',
-                    'link_target' => null,
-                    'children' => []
-                ],
-                [
-                    'name' => 'Archive',
-                    'absolute_path' => '/Archive',
-                    'link_target' => 'bar@bar.com.archive',
-                    'children' => []
-                ],
-                [
-                    'name' => 'Archive_bar',
-                    'absolute_path' => '/Archive_bar',
-                    'link_target' => 'bar@bar.com.archive',
-                    'children' => []
-                ],
-            ]
-        ]);
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function mapRawFolderResponse($rawFolderResponse)
+    {
+        $rawFolderResponse = $this->sanitizeRootFolder($rawFolderResponse);
+        $folderDetails = $this->folderAttributes($rawFolderResponse);
+        $folderDetails['children'] = $this->folderChildren($rawFolderResponse);
+
+        return $folderDetails;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return mixed
+     */
+    private function sanitizeRootFolder($rawFolderResponse)
+    {
+        if (count(array_keys($rawFolderResponse)) === 1) {
+            $rawFolderResponse = $rawFolderResponse['folder'];
+        }
+
+        return $rawFolderResponse;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function folderAttributes($rawFolderResponse)
+    {
+        $folderDetails = [];
+
+        if (array_key_exists('@attributes', $rawFolderResponse)) {
+            $folderAttributes = $rawFolderResponse['@attributes'];
+            $folderDetails['name'] = $folderAttributes['name'];
+            $folderDetails['absolute_path'] = $folderAttributes['absFolderPath'];
+            $folderDetails['link_target'] = array_key_exists('owner', $folderAttributes) ? $folderAttributes['owner'] : null;
+        }
+
+        return $folderDetails;
+    }
+
+    /**
+     * @param $rawFolderResponse
+     * @return array
+     */
+    private function folderChildren($rawFolderResponse)
+    {
+        $children = [];
+
+        if (array_key_exists('folder', $rawFolderResponse)) {
+            $folderResponse = $rawFolderResponse['folder'];
+            if (array_key_exists(0, $folderResponse)) {
+                foreach ($folderResponse as $folderChildResponse) {
+                    $children[] = $this->mapRawFolderResponse($folderChildResponse);
+                }
+            } else {
+                $children[] = $this->mapRawFolderResponse($folderResponse);
+            }
+        }
+
+        if (array_key_exists('link', $rawFolderResponse)) {
+            $linkResponse = $rawFolderResponse['link'];
+            if (array_key_exists(0, $linkResponse)) {
+                foreach ($linkResponse as $linkChildResponse) {
+                    $children[] = $this->mapRawFolderResponse($linkChildResponse);
+                }
+            } else {
+                $children[] = $this->mapRawFolderResponse($linkResponse);
+            }
+        }
+
+        return $children;
     }
 }
