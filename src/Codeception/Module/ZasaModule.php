@@ -479,7 +479,7 @@ class ZasaModule extends Module implements MultiSession
     {
         $this->assertTrue(
             $this->isAbsolutePathLinkedToTargetInSomeChildFolder($this->result, $path, $target),
-            "I do not see a link from the folder /Archive to bar@bar.com.archive"
+            "I do not see a link from the folder {$path} to {$target}"
         );
     }
 }
