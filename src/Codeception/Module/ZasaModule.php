@@ -335,4 +335,9 @@ class ZasaModule extends Module implements MultiSession
 
         return $id;
     }
+
+    public function getFolderStructureFromZimbra($accountName)
+    {
+        $this->zasa->getFolders(null);
+    }
 }
