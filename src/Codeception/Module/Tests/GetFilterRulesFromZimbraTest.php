@@ -25,4 +25,14 @@ class GetFilterRulesFromZimbraTest extends ZasaModuleTestCase
         $this->module->getFilterRulesFromZimbra('foo@bar.com');
         $this->zasa->shouldHaveReceived('getFilterRules')->with('foo@bar.com');
     }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyAccountName()
+    {
+        $this->module->getFilterRulesFromZimbra('bar@baz.com');
+        $this->zasa->shouldHaveReceived('getFilterRules')->with('bar@baz.com');
+    }
 }

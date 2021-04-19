@@ -488,6 +488,6 @@ class ZasaModule extends Module implements MultiSession
      */
     public function getFilterRulesFromZimbra($address)
     {
-        $this->zasa->getFilterRules('foo@bar.com');
+        $this->zasa->getFilterRules($address);
     }
 }
