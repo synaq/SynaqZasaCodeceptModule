@@ -488,30 +488,6 @@ class ZasaModule extends Module implements MultiSession
      */
     public function getFilterRulesFromZimbra($address)
     {
-        $this->zasa->getFilterRules($address);
-        $this->_setResult([
-            [
-                'name' => 'Archive_Read',
-                'active' => true,
-                'test_condition' => 'any',
-                'tests' =>
-                    [
-                        [
-                            'test' => 'header',
-                            'stringComparison' => 'matches',
-                            'header' => 'from',
-                            'index' => '0',
-                            'value' => '*'
-                        ]
-                    ],
-                'actions' => [
-                    [
-                        'action' => 'flag',
-                        'flagName' => 'read',
-                        'index' => '0'
-                    ]
-                ]
-            ]
-        ]);
+        $this->_setResult($this->zasa->getFilterRules($address));
     }
 }

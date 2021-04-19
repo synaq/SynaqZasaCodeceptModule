@@ -67,7 +67,24 @@ class GetFilterRulesFromZimbraTest extends ZasaModuleTestCase
             ]
         ];
         $this->zasa->shouldReceive('getFilterRules')->andReturn($returnedRules);
-        $this->module->getFilterRulesFromZimbra('bar@baz.com');
+        $this->module->getFilterRulesFromZimbra(null);
         $this->assertEquals($returnedRules, $this->module->grabResultFromZimbra());
+    }
+
+    /**
+     * @test
+     * @throws SoapFaultException
+     */
+    public function acceptsAnyResultFromZimbra()
+    {
+        $this->zasa->shouldReceive('getFilterRules')->andReturn([]);
+        $this->module->getFilterRulesFromZimbra(null);
+        $this->assertEquals([], $this->module->grabResultFromZimbra());
+    }
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->zasa->shouldReceive('getFilterRules')->andReturn([])->byDefault();
     }
 }
