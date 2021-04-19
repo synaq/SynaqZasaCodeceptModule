@@ -483,8 +483,11 @@ class ZasaModule extends Module implements MultiSession
         );
     }
 
+    /**
+     * @throws SoapFaultException
+     */
     public function getFilterRulesFromZimbra($address)
     {
-
+        $this->zasa->getFilterRules('foo@bar.com');
     }
 }
