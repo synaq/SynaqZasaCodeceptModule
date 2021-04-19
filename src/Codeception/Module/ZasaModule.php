@@ -482,4 +482,9 @@ class ZasaModule extends Module implements MultiSession
             "I do not see a link from the folder {$path} to {$target}"
         );
     }
+
+    public function getFilterRulesFromZimbra($address)
+    {
+
+    }
 }
