@@ -519,4 +519,12 @@ class ZasaModule extends Module implements MultiSession
 
         return $found;
     }
+
+    public function dontSeeZimbraFilterRuleWithAttributes(array $attributeSubset)
+    {
+        $this->assertFalse(
+            $this->attributesAreSubsetOfAtLeastOneRule($attributeSubset),
+            'I see at least one rule with these attributes: '.json_encode($attributeSubset)
+        );
+    }
 }
