@@ -141,11 +141,11 @@ class ZasaModule extends Module implements MultiSession
         if (is_null($this->client)) {
             $this->client = new Wrapper(
                 null, false, true, false, array(
-                'CURLOPT_RETURNTRANSFER' => true,
-                'CURLOPT_SSL_VERIFYPEER' => false,
-                'CURLOPT_SSL_VERIFYHOST' => false,
-                'CURLOPT_SSLVERSION' => 1,
-            )
+                    'CURLOPT_RETURNTRANSFER' => true,
+                    'CURLOPT_SSL_VERIFYPEER' => false,
+                    'CURLOPT_SSL_VERIFYHOST' => false,
+                    'CURLOPT_SSLVERSION' => 1,
+                )
             );
         }
 
@@ -379,7 +379,10 @@ class ZasaModule extends Module implements MultiSession
             $folderAttributes = $rawFolderResponse['@attributes'];
             $folderDetails['name'] = $folderAttributes['name'];
             $folderDetails['absolute_path'] = $folderAttributes['absFolderPath'];
-            $folderDetails['link_target'] = array_key_exists('owner', $folderAttributes) ? $folderAttributes['owner'] : null;
+            $folderDetails['link_target'] = array_key_exists(
+                'owner',
+                $folderAttributes
+            ) ? $folderAttributes['owner'] : null;
         }
 
         return $folderDetails;
@@ -489,5 +492,31 @@ class ZasaModule extends Module implements MultiSession
     public function getFilterRulesFromZimbra($address)
     {
         $this->_setResult($this->zasa->getFilterRules($address));
+    }
+
+    public function seeZimbraFilterRuleWithAttributes(array $attributeSubset)
+    {
+        $this->assertTrue(
+            $this->attributesAreSubsetOfAtLeastOneRule($attributeSubset),
+            'I do not see any rule with at least these attributes: '.json_encode($attributeSubset)
+        );
+    }
+
+    /**
+     * @param array $attributeSubset
+     * @return bool
+     */
+    private function attributesAreSubsetOfAtLeastOneRule(array $attributeSubset)
+    {
+        $found = false;
+
+        foreach ($this->result as $rule) {
+            if (array_intersect_assoc($rule, $attributeSubset) === $attributeSubset) {
+                $found = true;
+                break;
+            }
+        }
+
+        return $found;
     }
 }
