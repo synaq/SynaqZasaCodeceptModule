@@ -1,6 +1,6 @@
 {
     "name": "synaq/zasa-codecept-module",
-    "description": "Zimbra Admin SOAP API module for Coception using the Synaq ZASA bundle",
+    "description": "Zimbra Admin SOAP API module for Codeception using the SYNAQ ZASA bundle",
     "authors": [
         {
             "name": "Willem Viljoen",
@@ -8,8 +8,9 @@
         }
     ],
     "require": {
-        "synaq/zasa-bundle": "5.0",
+        "synaq/zasa-bundle": "5.1",
 	    "codeception/codeception": "2.1.11",
+        "symfony/framework-bundle": "v2.8.52",
         "ext-json": "*"
     },
     "require-dev": {
